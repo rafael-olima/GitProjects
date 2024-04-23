@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     # Menu
     st.sidebar.title('Sender')
-    st.sidebar.write('Select your file to encrypt or decrypt')
+    st.sidebar.write('Select your file to encrypt')
     uploaded_file = st.sidebar.file_uploader('Select the file', type=['txt', 'csv'])
 
     # Verify if the file was uploaded and store the content.
