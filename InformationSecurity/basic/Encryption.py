@@ -9,17 +9,23 @@ class myEncryption:
         self.__private_key = private_key
         self.__public_key = public_key
 
-    def encrypt_file(self,file):
-        # message = b"encrypted data"
-        cipher = self.__public_key.encrypt(
-            file,
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                algorithm=hashes.SHA256(),
-                label=None
+    def encrypt_file(self, file):
+        block_size = 256
+        encrypted_blocks = []
+        offset = 0
+        while offset < len(file):
+            block = file[offset:offset + block_size]
+            encrypted_block = self.__public_key.encrypt(
+                block,
+                padding.OAEP(
+                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                    algorithm=hashes.SHA256(),
+                    label=None
+                )
             )
-        )
-        return cipher
+            encrypted_blocks.append(encrypted_block)
+            offset += block_size
+        return b''.join(encrypted_blocks)
 
     def decrypt_file(self,cipher):
         original = self.__private_key.decrypt(
