@@ -10,7 +10,7 @@ class myEncryption:
         self.__public_key = public_key
 
     def encrypt_file(self, file):
-        block_size = 256
+        block_size = 128
         encrypted_blocks = []
         offset = 0
         while offset < len(file):
@@ -27,16 +27,23 @@ class myEncryption:
             offset += block_size
         return  b''.join(encrypted_blocks)
 
-    def decrypt_file(self,cipher):
-        original = self.__private_key.decrypt(
-            cipher,
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                algorithm=hashes.SHA256(),
-                label=None
+    def decrypt_file(self, file):
+        block_size = 256
+        decrypted_blocks = []
+        offset = 0
+        while offset < len(file):
+            encrypted_block = file[offset:offset + block_size]
+            decrypted_block = self.__private_key.decrypt(
+                encrypted_block,
+                padding.OAEP(
+                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                    algorithm=hashes.SHA256(),
+                    label=None
+                )
             )
-        )
-        return original
+            decrypted_blocks.append(decrypted_block)
+            offset += block_size
+        return b''.join(decrypted_blocks)
 
     def signing(self,file):
         #message = b"A message I want to sign"
