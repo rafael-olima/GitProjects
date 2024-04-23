@@ -25,7 +25,7 @@ class myEncryption:
             )
             encrypted_blocks.append(encrypted_block)
             offset += block_size
-        return b''.join(encrypted_blocks)
+        return  b''.join(encrypted_blocks)
 
     def decrypt_file(self,cipher):
         original = self.__private_key.decrypt(
