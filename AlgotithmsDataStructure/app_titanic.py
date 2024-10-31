@@ -32,7 +32,7 @@ def main():
             else:
                 st.image('died.png')
         else:
-            st.error(response.json())
+            st.error(response.status_code)
 
 if __name__ == "__main__":
     main()
