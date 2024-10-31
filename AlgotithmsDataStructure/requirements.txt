@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pandas
+pickle
+pydantic
+streamlit
