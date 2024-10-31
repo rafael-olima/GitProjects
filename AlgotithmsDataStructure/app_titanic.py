@@ -13,7 +13,7 @@ def main():
     classify = st.sidebar.button('Classify')
 
     if classify:
-        url = f"http://127.0.0.1:8000/predict"
+        url = f"https://titanic-api-1gi7.onrender.com/predict"
 
         input = {
             'pclass': pclass,
