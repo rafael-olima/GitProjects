@@ -28,9 +28,9 @@ def main():
         response = requests.post(url, json=input)
         if response.status_code == 200:
             if response.json()['prediction'] == 1:
-                st.image('survived.png')
+                st.write('Survived')
             else:
-                st.image('died.png')
+                st.write('Died')
         else:
             st.error(response.status_code)
 
