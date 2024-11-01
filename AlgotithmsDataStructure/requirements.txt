@@ -3,4 +3,4 @@ uvicorn
 pandas
 pydantic
 streamlit
-sklearn
+scikit-learn
